@@ -1,37 +1,32 @@
-const getSumBtn = document.createElement("button");
-getSumBtn.append("Get Total Price");
-document.body.appendChild(getSumBtn);
+ const getSumBtn = document.getElementById("getSumBtn");
 
-const getSum = () => {
-//Add your code here
-	   // Select all elements with the class 'price'
-    const priceElements = document.querySelectorAll(".price");
-    
-    // Initialize a variable to store the total price
-    let totalPrice = 0;
+        // Function to calculate and display total price
+        const getSum = () => {
+            // Get all price elements
+            const priceElements = document.querySelectorAll(".price");
 
-    // Loop through all selected elements and calculate the sum of prices
-    priceElements.forEach(priceElement => {
-        totalPrice += parseFloat(priceElement.textContent);
-    });
+            // Initialize total price
+            let totalPrice = 0;
 
-    // Create a new row for the total price
-    const newRow = document.createElement("tr");
-    
-    // Create a single cell spanning across all columns (in this case, 2 columns)
-    const newCell = document.createElement("td");
-    newCell.setAttribute("colspan", "2"); // Set colspan to 2 to span across both columns
-    newCell.style.textAlign = "center"; // Center the text in the cell
-    newCell.textContent = `Total Price: Rs ${totalPrice}`;
+            // Loop through price elements and sum their values
+            priceElements.forEach(priceElement => {
+                totalPrice += parseFloat(priceElement.textContent);
+            });
 
-    // Append the cell to the row
-    newRow.appendChild(newCell);
+            // Create a new row for total price
+            const newRow = document.createElement("tr");
 
-    // Append the new row to the table
-    const table = document.querySelector("table");
-    table.appendChild(newRow);
-  
-};
+            // Create a single cell spanning both columns
+            const newCell = document.createElement("td");
+            newCell.setAttribute("colspan", "2");
+            newCell.style.textAlign = "center";
+            newCell.textContent = `Total Price: Rs ${totalPrice.toFixed(2)}`; // Format to two decimal places
 
-getSumBtn.addEventListener("click", getSum);
+            // Append the cell to the row and the row to the table
+            newRow.appendChild(newCell);
+            const table = document.querySelector("table");
+            table.appendChild(newRow);
+        };
 
+        // Add event listener to button for click
+        getSumBtn.addEventListener("click", getSum);
